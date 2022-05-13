@@ -1,0 +1,15 @@
+.login {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+.login-btn {
+    background-color:green;
+    color:white;
+    padding:15px;
+    border-radius: 20px;
+    text-decoration: none;
+    margin-left: 20px
+}

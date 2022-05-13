@@ -1,0 +1,27 @@
+.main{
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 50px;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding:100px;
+    border: 50px;
+    border-radius:50px;
+    background-color: grey;
+}
+
+.left{
+    margin: 40px;
+}
+
+.right{
+    margin:50px;
+    width: 60%
+}
+
+ .vl{
+     border-left:5px solid black;
+     height:500px
+ }
