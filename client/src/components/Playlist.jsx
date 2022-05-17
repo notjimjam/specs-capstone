@@ -1,7 +1,6 @@
 import React from 'react'
 import '../css/Playlist.css'
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function Playlist({ track, chooseTrack}) {

@@ -1,55 +1,65 @@
 import React, { useState, useEffect } from 'react'
 import '../css/Weather.css'
+import axios from 'axios'
 
-const weather = require('openweather-apis');
+const baseUrl = 'http://api.weatherapi.com/v1/current.json?key='
+const weatherKey = '03e97989d9564883919185503221105'
 
-weather.setLang('en');
-weather.setAPPID('a58c70473a64313eecf176d311de0ce5');  
-weather.setUnits('imperial')
 
-export default function Weather({ zipCode }) {
-    const [result, setResult] = useState(null)
-    const [city, setCity] = useState('')
-    const [country, setCountry] = useState('')
-    const [wind, setWind] = useState('')
-    const [temp, setTemp] = useState('')
-    const [desc, setDesc] = useState('')
-  
-    useEffect(() => {
-      weather.setZipCode(zipCode)
-      weather.getAllWeather((err, json) => {
-        if (err) {
-          setResult(null)
-        } else {
-          setResult(json)
-        } 
-      }) 
-    },[zipCode])
+function Weather({ zipCode }) {
 
-    useEffect(() => {
-      if(result !== null) {
-        setCity(result.name)
-        setCountry(result.sys.country)
-        setWind(result.wind.speed)
-        setTemp(result.main.temp)
-        setDesc(result.weather[0].description)
+  const [weather, setWeather] = useState(null)
+  const [city, setCity] = useState('')
+  const [state, setState] = useState('')
+  const [country, setCountry] = useState('')
+  const [wind, setWind] = useState('')
+  const [temp, setTemp] = useState('')
+  const [cond, setCond] = useState('')
+  const [feelsLike, setFeelsLike] = useState('')
+  const [icon, setIcon] = useState('')
 
-      }
-      
-    },[result])
-    const roundTemp = Math.round(temp)
-    const roundWind = Math.round(wind)
 
-    return (
-      <div className='weather'>
-        <div>
-          <h4>Current Conditions for {city}, {country} :</h4>
-        </div>
-        <div>
-          <p>Temperature: {roundTemp}°F</p>
-          <p>Wind Speed: {roundWind} mph</p>
-          <p>Sky: {desc}</p>
-        </div>
+  useEffect(() => {
+    if(!zipCode) return
+    axios.get(`${baseUrl}${weatherKey}&q=${zipCode}`)
+      .then((res) => {
+        setWeather(res.data)
+      }).catch((err) => {
+        console.log(err)
+      })
+
+  }, [zipCode])
+
+  useEffect(() => {
+    if(weather !== null){
+      setCity(weather.location.name)
+      setState(weather.location.region)
+      setCountry(weather.location.country)
+      setCond(weather.current.condition.text)
+      setTemp(weather.current.temp_f)
+      setWind(weather.current.wind_mph)
+      setFeelsLike(weather.current.feelslike_f)
+      setIcon(weather.current.condition.icon)
+    }
+
+  },[weather])
+
+
+
+  return (
+    <div className='weather'>
+      <div>
+        <h4>Current Conditions for {city}, {state} :</h4>
       </div>
-    )
+      <div>
+        <p>Temperature: {temp}°F</p>
+        <p>Feels Like: {feelsLike}°F</p>
+        <p>Wind Speed: {wind} mph</p>
+        <p>Conditions: {cond}</p>
+        <img src={icon} alt="" />
+      </div>
+    </div>
+        )
 }
+
+export default Weather

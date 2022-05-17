@@ -23,7 +23,7 @@ function Dashboard({ code }) {
     function chooseTrack(track) {
       setPlayingTrack(track)
     }
-    const word = `summer`
+    const word = `snowy`
 
     useEffect(() => {
         if (!accessToken) return;

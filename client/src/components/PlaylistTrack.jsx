@@ -2,7 +2,7 @@ import React from 'react'
 import '../css/PlaylistTrack.css'
 
 function PlaylistTrack({ track, chooseTrack}) {
-console.log(track)
+// console.log(track)
   function handlePlay() {
       chooseTrack(track)
   }
