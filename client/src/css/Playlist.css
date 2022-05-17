@@ -3,5 +3,12 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+    cursor: pointer;
+}
+
+.header-img{
+    margin-right:5px;
+    height: 100px;
+    width: 100px
 }

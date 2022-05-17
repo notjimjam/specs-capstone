@@ -1,0 +1,14 @@
+.tracks{
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.track-names{
+    display:flex;
+    flex-direction: column;
+    justify-content: normal;
+    align-items: flex-start;
+    margin-left: 5px;
+}

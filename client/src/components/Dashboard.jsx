@@ -91,10 +91,14 @@ function Dashboard({ code }) {
         </div>
         <div className='vl'></div>
         <div className='right'>
-          <Playlist 
-          list={playlistResults}
-          chooseTrack={chooseTrack}
-          />
+          {playlistResults.map((track)=> (
+            <Playlist 
+            track={track}
+            chooseTrack={chooseTrack}
+            key={track.uri}
+            />
+
+          ))}
           <div className='scroll'>
             {playlistTracks.map((track)=> (
               <PlaylistTrack 

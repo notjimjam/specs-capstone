@@ -28,6 +28,10 @@
  }
 
  .scroll{
+     display:flex;
+     flex-direction:column;
+     justify-content: normal;
+     align-items:flex-start;
      height: 300px;
      width: 100%;
      overflow: scroll;

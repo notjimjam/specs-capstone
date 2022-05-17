@@ -1,17 +1,16 @@
 import React from 'react'
+import '../css/PlaylistTrack.css'
 
 function PlaylistTrack({ track, chooseTrack}) {
-
+console.log(track)
   function handlePlay() {
       chooseTrack(track)
   }
 
-  // console.log(track)
 
   return (
     <div
-      className='d-flex m-2 align-items-center'
-      style={{ cursor: 'pointer' }}
+      className='tracks'
       onClick={handlePlay}
     >
       <img
@@ -19,9 +18,9 @@ function PlaylistTrack({ track, chooseTrack}) {
         style={{ height: '64px', width: '64px' }}
         alt=''
       />
-      <div className='ml-3'>
-        <div>{track.title}</div>
-        <div className='text-muted'>{track.artist}</div>
+      <div className='track-names'>
+        <div className='track-title'>{track.title}</div>
+        <div className='track-artist'>{track.artist}</div>
       </div>
     </div>
   );
