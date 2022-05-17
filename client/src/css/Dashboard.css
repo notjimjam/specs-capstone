@@ -10,6 +10,7 @@
     border: 50px;
     border-radius:50px;
     background-color: grey;
+    max-height: 750px
 }
 
 .left{
@@ -25,3 +26,10 @@
      border-left:5px solid black;
      height:500px
  }
+
+ .scroll{
+     height: 300px;
+     width: 100%;
+     overflow: scroll;
+ }
+
