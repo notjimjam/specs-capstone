@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import '../css/Dashboard.css'
 import useAuth from '../auth/useAuth'
 import SpotifyWebApi from 'spotify-web-api-node'
-import Input from './Input'
+import Weather from './Weather'
 import Player from './Player'
 import Playlist from './Playlist'
 import PlaylistTrack from './PlaylistTrack'
@@ -19,11 +19,16 @@ function Dashboard({ code }) {
     const [playlistResults, setPlaylistResults] = useState([])
     const [playlistId, setPlaylistId] = useState()
     const [playlistTracks, setPlaylistTracks] = useState([])
+    const [find, setFind] = useState(null)
 
     function chooseTrack(track) {
       setPlayingTrack(track)
     }
-    const word = `snowy`
+    
+
+    function searchTerm(word) {
+      setFind(word)
+    }
 
     useEffect(() => {
         if (!accessToken) return;
@@ -33,9 +38,10 @@ function Dashboard({ code }) {
       useEffect(() => {
         if (!playlist) return setPlaylistResults([]);
         if (!accessToken) return;
+        if (find === null) return
     
         let cancel = false;
-        spotifyApi.searchPlaylists(word, {limit:1, offset: 0}).then((res) => {
+        spotifyApi.searchPlaylists(find, {limit:1, offset: 0}).then((res) => {
           if (cancel) return;
           // console.log(res.body.playlists)
           setPlaylistResults(
@@ -55,7 +61,7 @@ function Dashboard({ code }) {
           )
         });
         return () => (cancel = true);
-      }, [playlist, accessToken, word]);
+      }, [playlist, accessToken, find]);
 
       useEffect(() => {
         if(!accessToken) return
@@ -65,6 +71,7 @@ function Dashboard({ code }) {
           // console.log(res.body)
           setPlaylistTracks(
             res.body.items.map((item) => {
+              // console.log(item)
               const smallestAlbumImage = item.track.album.images.reduce(
                 (smallest, image) => {
                   if (image.height < smallest.height) return image;
@@ -87,7 +94,7 @@ function Dashboard({ code }) {
   return (
       <div className='main'>
         <div className='left'>
-          <Input />
+          <Weather searchTerm={searchTerm}/>
         </div>
         <div className='vl'></div>
         <div className='right'>
@@ -115,22 +122,3 @@ function Dashboard({ code }) {
 }
 
 export default Dashboard
-
-
-
-// spotifyApi.searchPlaylists(word, {limit: 1, offset: 0}).then((res) =>
-        // console.log(res.body.playlists.items))
-      // useEffect(() => {
-      //   if(!accessToken) return
-      //   if(!playlist) return setPlaylist([])
-
-      //   spotifyApi.getPlaylistTracks('2Dp9QFZu7rFkQ1xjLF9ost').then((res) => {
-      //     setPlaylistResults(
-      //       res.body.items.map((item) => {
-      //         return {
-      //           item: item
-      //         }
-      //       })
-      //     )
-      //   })
-      // }, [playlist, accessToken])
