@@ -1,5 +1,14 @@
+/* .back{
+    background-color: blue;
+} */
+
 .weather {
     display: flex;
     flex-direction: column;
     text-align: left;
 }
+
+
+/* #outlined-bas{
+    margin:10px;
+} */

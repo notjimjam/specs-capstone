@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import { Button } from '@mui/material'
 import '../css/Weather.css'
 import axios from 'axios'
 
@@ -121,7 +122,7 @@ function Weather({ searchTerm }) {
     }, [cond, wind, randFreezing, randSunny, randWindy, randPartly, randHail, randHeavy, randRain, randCloudy, randFog, randSnow, randThunder, randClear])
     
   return (
-    <div>
+    <div className='back'>
       <div>
         <input type='text' placeholder='Enter Zipcode' onChange={inputHandler}></input>
         <br/>

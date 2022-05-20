@@ -9,8 +9,9 @@
     padding:100px;
     border: 50px;
     border-radius:50px;
-    background-color: #e5e5e5;
-    max-height: 750px
+    background-color: #e0e1dd;
+    max-height: 750px;
+    color: #1b263b
 }
 
 .left{

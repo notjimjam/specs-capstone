@@ -1,9 +1,14 @@
+/* *{
+  background-color: #598392
+} */
+
 .App {
   text-align: center;
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* background-color: #1b263b; */
 }
 
 
