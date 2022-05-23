@@ -1,6 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import { Button } from '@mui/material'
-import '../css/Weather.css'
 import axios from 'axios'
 
 const baseUrl = 'http://api.weatherapi.com/v1/current.json?key='
@@ -8,16 +6,10 @@ const weatherKey = '03e97989d9564883919185503221105'
 
 function Weather({ searchTerm }) {
     const [input, setInput] = useState('')
-    const [value, setValue] = useState('')
+    const [value, setValue] = useState(null)
     const [weather, setWeather] = useState(null)
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
-    const [country, setCountry] = useState('')
     const [wind, setWind] = useState('')
-    const [temp, setTemp] = useState('')
     const [cond, setCond] = useState('')
-    const [feelsLike, setFeelsLike] = useState('')
-    const [icon, setIcon] = useState('')
     const [word, setWord] = useState('')
 
     const freezing = ['cold winter lofi', 'cold weather country', 'cold weather vibezz', 'for cold winter mornings', 'cold weather supremacy', 'the weather is getting colder', 'cold skies/grey weather']
@@ -56,14 +48,25 @@ function Weather({ searchTerm }) {
     const clear = ['the midnight hour', 'atmospheric piano', 'deep sleep', 'cosmic country', 'late night jazz', 'evening acoustic', 'moonlight beats']
     const randClear = clear[Math.floor(Math.random() * clear.length)]
 
-    const inputHandler = (event) => {
-        setInput(event.target.value)
-    }
-
-    const clickHandler = (event) => {
+      const inputHandler = (event) => {
+        event.preventDefault()
+          setInput(event.target.value)
+      }
+      
+      const clickHandler = (event) => {
         event.preventDefault()
         setValue(input)
+        searchTerm(word)
     }
+
+    // async function handleClick () {
+    //   let promise = new Promise((resolve, reject) => {
+    //     setTimeout(() => resolve("I am complete"), 3000)
+    //   })
+
+    //   let result = await promise
+    //   alert(result)
+    // }
 
     useEffect(() => {
       if(!value) return
@@ -73,44 +76,40 @@ function Weather({ searchTerm }) {
         }).catch((err) => {
           console.log(err)
         })
+        if(weather !== null)  {
+          setCond(weather.current.condition.text)
+          // setCond('partly')
+          setWind(weather.current.wind_mph)
+        }
   
-    }, [value])
+    }, [value, weather])
 
     useEffect(() => {
-      if(weather !== null){
-        setCity(weather.location.name)
-        setState(weather.location.region)
-        setCountry(weather.location.country)
-        setCond(weather.current.condition.text)
-        setTemp(weather.current.temp_f)
-        setWind(weather.current.wind_mph)
-        setFeelsLike(weather.current.feelslike_f)
-        setIcon(weather.current.condition.icon)
-      }
-  
-    },[weather])
-
-    useEffect(() => {
+      // console.log(cond)
       if(!cond) return
       if(!wind) return
       if (wind > 40) {
         setWord(randWindy)
       } else if(cond.toLowerCase().includes("sunny")) {
         setWord(randSunny)
+        document.body.className = 'mood-sunny'
       } else if(cond.toLowerCase().includes("partly")) {
         setWord(randPartly)
+        document.body.className = 'mood-partly'
       }else if(cond.toLowerCase().includes("freezing")) {
         setWord(randFreezing)
       }else if(cond.toLowerCase().includes("pellets")) {
         setWord(randHail)
       } else if(cond.toLowerCase().includes("snow") || cond.toLowerCase().includes('blizzard'))  {
         setWord(randSnow)
+        document.body.className= 'mood-snow'
       } else if(cond.toLowerCase().includes("moderate rain") || cond.toLowerCase().includes('heavy rain') || cond.toLowerCase().includes('torrential')) {
         setWord(randHeavy)
       } else if(cond.toLowerCase().includes("drizzle") || cond.toLowerCase().includes('rain') || cond.toLowerCase().includes('sleet')) {
         setWord(randRain)
       } else if(cond.toLowerCase().includes("cloudy") || cond.toLowerCase().includes('overcast')) {
         setWord(randCloudy)
+        document.body.className='mood-cloudy'
       } else if(cond.toLowerCase().includes("mist") || cond.toLowerCase().includes('fog')) {
         setWord(randFog)
       } else if(cond.toLowerCase().includes("thunder")) {
@@ -122,26 +121,13 @@ function Weather({ searchTerm }) {
     }, [cond, wind, randFreezing, randSunny, randWindy, randPartly, randHail, randHeavy, randRain, randCloudy, randFog, randSnow, randThunder, randClear])
     
   return (
-    <div className='back'>
+    <div>
       <div>
-        <input type='text' placeholder='Enter Zipcode' onChange={inputHandler}></input>
+        <input type='text' placeholder='Enter Zipcode' onChange={inputHandler} className='zip-input'></input>
         <br/>
-        <button onClick={clickHandler}>Submit</button>
+        <button onClick={clickHandler} className='submit-btn'>Submit</button>
       </div>
-      <div className='weather'>
-      <div>
-        <h4>Current Conditions for {city}, {state} :</h4>
-      </div>
-      <div>
-        <p>Temperature: {temp}°F</p>
-        <p>Feels Like: {feelsLike}°F</p>
-        <p>Wind Speed: {wind} mph</p>
-        <p>Conditions: {cond}</p>
-        <img src={icon} alt="" />
-        <button onClick={() => searchTerm(word)}>generate playlist</button>
-        {/* <RandomWord /> */}
-      </div>
-    </div>
+        <button onClick={() => searchTerm(word)} className= 'random-btn'></button>
     </div>
   )
 }

@@ -10,7 +10,7 @@ function Playlist({ track, chooseTrack}) {
     return (
       <div
       className='playlist-header'
-      onClick={handlePlay}
+      onLoad={handlePlay}
       >
       <img
         src={track.imageUrl}

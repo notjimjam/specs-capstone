@@ -12,6 +12,8 @@ const spotifyApi = new SpotifyWebApi({
     clientId:'6f5b9cf484324457963e8226b61fd6e6',
 })
 
+// Geolocation.getCurrentPosition()
+
 function Dashboard({ code }) {
     const accessToken = useAuth(code)
     const [playingTrack, setPlayingTrack] = useState()
@@ -93,19 +95,16 @@ function Dashboard({ code }) {
 
   return (
       <div className='main'>
-        <div className='left'>
           <Weather searchTerm={searchTerm}/>
-        </div>
-        <div className='vl'></div>
-        <div className='right'>
-          {playlistResults.map((track)=> (
-            <Playlist 
-            track={track}
-            chooseTrack={chooseTrack}
-            key={track.uri}
-            />
-
-          ))}
+          <div className= 'playlist-head'>
+            {playlistResults.map((track)=> (
+              <Playlist 
+              track={track}
+              chooseTrack={chooseTrack}
+              key={track.uri}
+              />
+            ))}
+          </div>
           <div className='scroll'>
             {playlistTracks.map((track)=> (
               <PlaylistTrack 
@@ -116,7 +115,6 @@ function Dashboard({ code }) {
             ))}
           </div>
           <Player accessToken={accessToken} trackUri={playingTrack?.uri}/>
-        </div>
       </div>
   )
 }

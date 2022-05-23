@@ -8,7 +8,78 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items:center;
   /* background-color: #1b263b; */
 }
 
+h1 {
+  font-size: 40px;
+  color: #133c55;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgb(224, 225, 221);
+}
 
+.random-btn {
+  background: url(../icons/shuffle.png) no-repeat;
+  background-size: 30px;
+  height:26px;
+  width:36px;
+  border: none;
+  cursor: pointer
+}
+
+.mood-sunny {
+  background-image: url(../images/sunny.jpg);
+  background-size:cover;
+  /* background: linear-gradient(rgb(255, 221, 83), rgb(51, 146, 248)) */
+}
+
+.mood-partly {
+  background-image: url(../images/partly.jpg);
+  background-size:cover;
+}
+
+/* .mood-freezing {
+  background-image: url(../images/freezing.jpg);
+  background-size:cover;
+} */
+
+/* .mood-hail {
+  background-image: url(../images/hail.jpg);
+  background-size:cover;
+} */
+
+.mood-snow {
+  background-image: url(../images/snow.jpg);
+  background-size:cover;
+}
+
+/* .mood-heavy {
+  background-image: url(../images/heavy.jpg);
+  background-size:cover;
+} */
+
+/* .mood-rain {
+  background-image: url(../images/rain.jpg);
+  background-size:cover;
+} */
+
+.mood-cloudy {
+  background-image: url(../images/cloudy.jpg);
+  background-size:cover;
+}
+
+/* .mood-fog {
+  background-image: url(../images/fog.jpg);
+  background-size:cover;
+} */
+
+/* .mood-thunder {
+  background-image: url(../images/thunder.jpg);
+  background-size:cover;
+} */
+
+/* .mood-clear {
+  background-image: url(../images/clear.jpg);
+  background-size:cover;
+} */
