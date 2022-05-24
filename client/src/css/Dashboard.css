@@ -7,7 +7,8 @@
     border-radius:50px;
     background-color: rgba(224, 225, 221, 0.5);
     width: 450px;
-    color: #1b263b
+    color: #1b263b;
+    margin-bottom: 300px
 }
 
 .playlist-head{

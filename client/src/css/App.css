@@ -1,6 +1,10 @@
 /* *{
   background-color: #598392
 } */
+body{
+  background: linear-gradient(#ffffff, #04270e) no-repeat;
+  background-size: 100%
+}
 
 .App {
   text-align: center;
@@ -12,6 +16,11 @@
   /* background-color: #1b263b; */
 }
 
+.logo{
+  height:200px;
+  margin-bottom: 50px
+}
+
 h1 {
   font-size: 40px;
   color: #133c55;
@@ -19,8 +28,12 @@ h1 {
   text-shadow: 2px 2px 4px rgb(224, 225, 221);
 }
 
+.zip-input{
+  width:100px
+}
+
 .random-btn {
-  background: url(../icons/shuffle.png) no-repeat;
+  background: url(../icons/shuffle1.png) no-repeat;
   background-size: 30px;
   height:26px;
   width:36px;
@@ -39,47 +52,47 @@ h1 {
   background-size:cover;
 }
 
-/* .mood-freezing {
-  background-image: url(../images/freezing.jpg);
-  background-size:cover;
-} */
-
-/* .mood-hail {
-  background-image: url(../images/hail.jpg);
-  background-size:cover;
-} */
-
-.mood-snow {
-  background-image: url(../images/snow.jpg);
+.mood-freezing {
+  background-image: url(../images/freezing2.jpg);
   background-size:cover;
 }
 
-/* .mood-heavy {
+.mood-hail {
+  background-image: url(../images/hail.jpg);
+  background-size:cover;
+}
+
+.mood-snow {
+  background-image: url(../images/snowy.jpg);
+  background-size:cover;
+}
+
+.mood-heavy {
   background-image: url(../images/heavy.jpg);
   background-size:cover;
-} */
+}
 
-/* .mood-rain {
+.mood-rain {
   background-image: url(../images/rain.jpg);
   background-size:cover;
-} */
+}
 
 .mood-cloudy {
   background-image: url(../images/cloudy.jpg);
   background-size:cover;
 }
 
-/* .mood-fog {
+.mood-fog {
   background-image: url(../images/fog.jpg);
   background-size:cover;
-} */
+}
 
-/* .mood-thunder {
+.mood-thunder {
   background-image: url(../images/thunder.jpg);
   background-size:cover;
-} */
+}
 
-/* .mood-clear {
+.mood-clear {
   background-image: url(../images/clear.jpg);
-  background-size:cover;
-} */
+  background-size: cover;
+}

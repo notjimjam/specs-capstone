@@ -49,7 +49,6 @@ function Weather({ searchTerm }) {
     const randClear = clear[Math.floor(Math.random() * clear.length)]
 
       const inputHandler = (event) => {
-        event.preventDefault()
           setInput(event.target.value)
       }
       
@@ -59,15 +58,6 @@ function Weather({ searchTerm }) {
         searchTerm(word)
     }
 
-    // async function handleClick () {
-    //   let promise = new Promise((resolve, reject) => {
-    //     setTimeout(() => resolve("I am complete"), 3000)
-    //   })
-
-    //   let result = await promise
-    //   alert(result)
-    // }
-
     useEffect(() => {
       if(!value) return
       axios.get(`${baseUrl}${weatherKey}&q=${value}`)
@@ -76,16 +66,18 @@ function Weather({ searchTerm }) {
         }).catch((err) => {
           console.log(err)
         })
-        if(weather !== null)  {
-          setCond(weather.current.condition.text)
-          // setCond('partly')
-          setWind(weather.current.wind_mph)
-        }
-  
-    }, [value, weather])
+    }, [value])
 
     useEffect(() => {
-      // console.log(cond)
+      if(weather !== null)  {
+        setCond(weather.current.condition.text)
+        // setCond('partly')
+        setWind(weather.current.wind_mph)
+      }
+    }, [weather])
+
+    useEffect(() => {
+
       if(!cond) return
       if(!wind) return
       if (wind > 40) {
@@ -98,33 +90,43 @@ function Weather({ searchTerm }) {
         document.body.className = 'mood-partly'
       }else if(cond.toLowerCase().includes("freezing")) {
         setWord(randFreezing)
+        document.body.className = 'mood-freezing'
       }else if(cond.toLowerCase().includes("pellets")) {
         setWord(randHail)
+        document.body.className= 'mood-hail'
       } else if(cond.toLowerCase().includes("snow") || cond.toLowerCase().includes('blizzard'))  {
         setWord(randSnow)
         document.body.className= 'mood-snow'
       } else if(cond.toLowerCase().includes("moderate rain") || cond.toLowerCase().includes('heavy rain') || cond.toLowerCase().includes('torrential')) {
         setWord(randHeavy)
+        document.body.className= 'mood-heavy'
       } else if(cond.toLowerCase().includes("drizzle") || cond.toLowerCase().includes('rain') || cond.toLowerCase().includes('sleet')) {
         setWord(randRain)
+        document.body.className= 'mood-rain'
       } else if(cond.toLowerCase().includes("cloudy") || cond.toLowerCase().includes('overcast')) {
         setWord(randCloudy)
         document.body.className='mood-cloudy'
       } else if(cond.toLowerCase().includes("mist") || cond.toLowerCase().includes('fog')) {
         setWord(randFog)
+        document.body.className = 'mood-fog'
       } else if(cond.toLowerCase().includes("thunder")) {
         setWord(randThunder)
+        document.body.className='mood-thunder'
       } else if(cond.toLowerCase().includes("clear")) {
         setWord(randClear)
+        document.body.className = 'mood-clear'
       }
 
     }, [cond, wind, randFreezing, randSunny, randWindy, randPartly, randHail, randHeavy, randRain, randCloudy, randFog, randSnow, randThunder, randClear])
     
+    // useEffect(() => {
+    //   searchTerm(word)
+    // }, [])
+
   return (
     <div>
       <div>
         <input type='text' placeholder='Enter Zipcode' onChange={inputHandler} className='zip-input'></input>
-        <br/>
         <button onClick={clickHandler} className='submit-btn'>Submit</button>
       </div>
         <button onClick={() => searchTerm(word)} className= 'random-btn'></button>

@@ -12,16 +12,13 @@ const spotifyApi = new SpotifyWebApi({
     clientId:'6f5b9cf484324457963e8226b61fd6e6',
 })
 
-// Geolocation.getCurrentPosition()
-
 function Dashboard({ code }) {
     const accessToken = useAuth(code)
     const [playingTrack, setPlayingTrack] = useState()
-    const [playlist, setPlaylist] = useState([])
     const [playlistResults, setPlaylistResults] = useState([])
     const [playlistId, setPlaylistId] = useState()
     const [playlistTracks, setPlaylistTracks] = useState([])
-    const [find, setFind] = useState(null)
+    const [find, setFind] = useState('')
 
     function chooseTrack(track) {
       setPlayingTrack(track)
@@ -31,6 +28,7 @@ function Dashboard({ code }) {
     function searchTerm(word) {
       setFind(word)
     }
+    
 
     useEffect(() => {
         if (!accessToken) return;
@@ -38,14 +36,12 @@ function Dashboard({ code }) {
       }, [accessToken]);
 
       useEffect(() => {
-        if (!playlist) return setPlaylistResults([]);
-        if (!accessToken) return;
+        // if (!accessToken) return;
         if (find === null) return
     
-        let cancel = false;
+        // let cancel = false;
         spotifyApi.searchPlaylists(find, {limit:1, offset: 0}).then((res) => {
-          if (cancel) return;
-          // console.log(res.body.playlists)
+          // if (cancel) return;
           setPlaylistResults(
             res.body.playlists.items.map((list) => {
               return {
@@ -62,8 +58,8 @@ function Dashboard({ code }) {
             })
           )
         });
-        return () => (cancel = true);
-      }, [playlist, accessToken, find]);
+        // return () => (cancel = true);
+      }, [find]);
 
       useEffect(() => {
         if(!accessToken) return
@@ -104,6 +100,7 @@ function Dashboard({ code }) {
               key={track.uri}
               />
             ))}
+             {/* <button onClick={() => searchTerm(find)} className= 'random-btn'></button> */}
           </div>
           <div className='scroll'>
             {playlistTracks.map((track)=> (
