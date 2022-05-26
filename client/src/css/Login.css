@@ -1,23 +1,59 @@
 .login {
-    display: flex;
+    display:flex;
+    box-sizing: border-box;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    margin: 20px;
-    width: 400px; 
-    height:400px;
+    width: 500px; 
+    height:500px;
+    padding:95px;
     border-radius: 50px;
     background-color: rgba(224, 225, 221, 0.5);
 }
+
+.login-para{
+    color:#133c55;
+    margin-bottom: 40px
+}
+
+.login-p{
+    /* margin:0 */
+}
+
+.login-btns{
+    margin: 20px
+}
+
+.btn-group{
+    margin-top: 30px;
+}
+
 .login-btn {
     background-color: #133C55;
     color:white;
     padding:15px;
     margin: 5px;
     border-radius: 20px;
-    text-decoration: none
+    text-decoration: none;
+    transition-duration: 0.4s;
 }
 
+.login-btn:hover{
+    background-color: #1f5d83;
+}
+/* .small-p{
+    color:#133c55;
+    margin-bottom:5px;
+} */
+
+.signup-btn{
+    color:#133C55;
+    transition-duration: 0.4s
+    /* text-decoration: none; */
+}
+.signup-btn:hover{
+    color:#1f5d83
+}
 
 a:hover{
     cursor: pointer

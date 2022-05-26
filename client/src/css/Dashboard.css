@@ -1,14 +1,14 @@
 .main{
     display:flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding:50px;
     border-radius:50px;
     background-color: rgba(224, 225, 221, 0.5);
     width: 450px;
+    height: 527px;
     color: #1b263b;
-    margin-bottom: 300px
 }
 
 .playlist-head{

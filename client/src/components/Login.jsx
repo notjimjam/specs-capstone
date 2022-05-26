@@ -9,12 +9,21 @@ const SIGN_UP = 'https://www.spotify.com/us/signup'
 function Login() {
   return (
     <div className='login'>
+      <div className='login-para'>
+        <p className='login-p'>Playlists curated for your local weather,</p>
+        <p className='login-p'>powered by Spotify</p>
+      </div>
+      <div className='btns'>
         <a href={AUTH_URL} className='login-btn'>
-            Login With Spotify
+            Log In With Spotify
         </a>
-        <a href={SIGN_UP} className='sign-btn'>
-           Sign Up
-        </a>
+        <div className='btn-group'>
+          {/* <p className='small-p'> or </p> */}
+          <a href={SIGN_UP} className='signup-btn'>
+            Sign Up
+          </a>
+        </div>
+      </div>
     </div>
   )
 }

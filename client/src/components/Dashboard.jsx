@@ -18,7 +18,7 @@ function Dashboard({ code }) {
     const [playlistResults, setPlaylistResults] = useState([])
     const [playlistId, setPlaylistId] = useState()
     const [playlistTracks, setPlaylistTracks] = useState([])
-    const [find, setFind] = useState('')
+    const [find, setFind] = useState(null)
 
     function chooseTrack(track) {
       setPlayingTrack(track)
@@ -31,13 +31,15 @@ function Dashboard({ code }) {
     
 
     useEffect(() => {
-        if (!accessToken) return;
+      if (!accessToken) return;
+      // console.log('hi')
         spotifyApi.setAccessToken(accessToken);
       }, [accessToken]);
 
       useEffect(() => {
         // if (!accessToken) return;
         if (find === null) return
+        // console.log('hi')
     
         // let cancel = false;
         spotifyApi.searchPlaylists(find, {limit:1, offset: 0}).then((res) => {
@@ -64,12 +66,11 @@ function Dashboard({ code }) {
       useEffect(() => {
         if(!accessToken) return
         if(!playlistId) return
+        // console.log('hi')
 
         spotifyApi.getPlaylistTracks(playlistId).then((res) => {
-          // console.log(res.body)
           setPlaylistTracks(
             res.body.items.map((item) => {
-              // console.log(item)
               const smallestAlbumImage = item.track.album.images.reduce(
                 (smallest, image) => {
                   if (image.height < smallest.height) return image;
@@ -90,8 +91,12 @@ function Dashboard({ code }) {
       
 
   return (
-      <div className='main'>
-          <Weather searchTerm={searchTerm}/>
+      <div className=''>
+        
+        <div className='main-weather'>
+          <Weather searchTerm={searchTerm} find={find} setFind={setFind}/>
+        </div>
+        <div className='main'>
           <div className= 'playlist-head'>
             {playlistResults.map((track)=> (
               <Playlist 
@@ -112,6 +117,7 @@ function Dashboard({ code }) {
             ))}
           </div>
           <Player accessToken={accessToken} trackUri={playingTrack?.uri}/>
+        </div>
       </div>
   )
 }
