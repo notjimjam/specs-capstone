@@ -3,9 +3,9 @@ import '../css/Playlist.css'
 
 
 
-function Playlist({ track, chooseTrack}) {
+function Playlist({ playlist, chooseTrack}) {
     function handlePlay() {
-        chooseTrack(track)
+        chooseTrack(playlist)
     }
     return (
       <div
@@ -14,11 +14,11 @@ function Playlist({ track, chooseTrack}) {
       onClick={handlePlay}
       >
       <img
-        src={track.imageUrl}
+        src={playlist.imageUrl}
         className='header-img'
         alt=''
         />
-      {track.name}
+      {playlist.name}
     </div>
   )
 }

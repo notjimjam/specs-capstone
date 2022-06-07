@@ -7,12 +7,6 @@ import Footer from './components/Footer';
 const code = new URLSearchParams(window.location.search).get('code');
 
 function App() {
-  // const logOutHandler = (event) => {
-  //   event.preventDefault();
-  //   <Login />;
-  //   document.body.className = 'logout';
-  // };
-
   return (
     <div className='App'>
       <div>

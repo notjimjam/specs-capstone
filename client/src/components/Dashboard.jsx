@@ -18,32 +18,29 @@ function Dashboard({ code }) {
     const [playlistResults, setPlaylistResults] = useState([])
     const [playlistId, setPlaylistId] = useState()
     const [playlistTracks, setPlaylistTracks] = useState([])
-    const [find, setFind] = useState(null)
+    const [search, setSearch] = useState(null)
 
-    function chooseTrack(track) {
-      setPlayingTrack(track)
+    function chooseTrack(uri) {
+      setPlayingTrack(uri)
     }
     
 
     function searchTerm(word) {
-      setFind(word)
+      setSearch(word)
     }
     
 
     useEffect(() => {
       if (!accessToken) return;
-      // console.log('hi')
         spotifyApi.setAccessToken(accessToken);
       }, [accessToken]);
 
       useEffect(() => {
-        // if (!accessToken) return;
-        if (find === null) return
-        // console.log('hi')
+        if (search === null) return
     
-        // let cancel = false;
-        spotifyApi.searchPlaylists(find, {limit:1, offset: 0}).then((res) => {
-          // if (cancel) return;
+        let cancel = false;
+        spotifyApi.searchPlaylists(search, {limit:1, offset: 0}).then((res) => {
+          if (cancel) return;
           setPlaylistResults(
             res.body.playlists.items.map((list) => {
               return {
@@ -60,13 +57,12 @@ function Dashboard({ code }) {
             })
           )
         });
-        // return () => (cancel = true);
-      }, [find]);
+        return () => (cancel = true);
+      }, [search]);
 
       useEffect(() => {
         if(!accessToken) return
         if(!playlistId) return
-        // console.log('hi')
 
         spotifyApi.getPlaylistTracks(playlistId).then((res) => {
           setPlaylistTracks(
@@ -94,18 +90,17 @@ function Dashboard({ code }) {
       <div className=''>
         
         <div className='main-weather'>
-          <Weather searchTerm={searchTerm} find={find} setFind={setFind}/>
+          <Weather searchTerm={searchTerm} search={search} setSearch={setSearch}/>
         </div>
         <div className='main'>
           <div className= 'playlist-head'>
-            {playlistResults.map((track)=> (
+            {playlistResults.map((playlist)=> (
               <Playlist 
-              track={track}
+              playlist={playlist}
               chooseTrack={chooseTrack}
-              key={track.uri}
+              key={playlist.uri}
               />
             ))}
-             {/* <button onClick={() => searchTerm(find)} className= 'random-btn'></button> */}
           </div>
           <div className='scroll'>
             {playlistTracks.map((track)=> (

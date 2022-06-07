@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import Shuffle from './Shuffle'
-import Login from './Login'
 
 const baseUrl = 'http://api.weatherapi.com/v1/current.json?key='
 const weatherKey = '03e97989d9564883919185503221105'
 
-function Weather({ searchTerm, find, setFind }) {
+function Weather({ searchTerm, search, setSearch }) {
     const [input, setInput] = useState('')
     const [value, setValue] = useState(null)
     const [weather, setWeather] = useState(null)
@@ -61,7 +60,7 @@ function Weather({ searchTerm, find, setFind }) {
         setIsZip(true)
     }
 
-    const closeClickHandler =(event) => {
+    const closeClickHandler = (event) => {
       event.preventDefault()
       setIsZip(false)
     }
@@ -93,40 +92,40 @@ function Weather({ searchTerm, find, setFind }) {
       if(!wind) return
       // console.log('hi')
       if (wind >= 30) {
-      setFind(randWindy)
+      setSearch(randWindy)
         document.body.className='mood-windy'
       } else if(cond.toLowerCase().includes("sunny")) {
-      setFind(randSunny)
+      setSearch(randSunny)
         document.body.className = 'mood-sunny'
       } else if(cond.toLowerCase().includes("partly")) {
-      setFind(randPartly)
+      setSearch(randPartly)
         document.body.className = 'mood-partly'
       }else if(cond.toLowerCase().includes("freezing")) {
-      setFind(randFreezing)
+      setSearch(randFreezing)
         document.body.className = 'mood-freezing'
       }else if(cond.toLowerCase().includes("pellets")) {
-      setFind(randHail)
+      setSearch(randHail)
         document.body.className= 'mood-hail'
       } else if(cond.toLowerCase().includes("snow") || cond.toLowerCase().includes('blizzard'))  {
-      setFind(randSnow)
+      setSearch(randSnow)
         document.body.className= 'mood-snow'
       } else if(cond.toLowerCase().includes("moderate rain") || cond.toLowerCase().includes('heavy rain') || cond.toLowerCase().includes('torrential')) {
-      setFind(randHeavy)
+      setSearch(randHeavy)
         document.body.className= 'mood-heavy'
       } else if(cond.toLowerCase().includes("drizzle") || cond.toLowerCase().includes('rain') || cond.toLowerCase().includes('sleet')) {
-      setFind(randRain)
+      setSearch(randRain)
         document.body.className= 'mood-rain'
       } else if(cond.toLowerCase().includes("cloudy") || cond.toLowerCase().includes('overcast')) {
-      setFind(randCloudy)
+      setSearch(randCloudy)
         document.body.className='mood-cloudy'
       } else if(cond.toLowerCase().includes("mist") || cond.toLowerCase().includes('fog')) {
-      setFind(randFog)
+      setSearch(randFog)
         document.body.className = 'mood-fog'
       } else if(cond.toLowerCase().includes("thunder")) {
-      setFind(randThunder)
+      setSearch(randThunder)
         document.body.className='mood-thunder'
       } else if(cond.toLowerCase().includes("clear")) {
-      setFind(randClear)
+      setSearch(randClear)
         document.body.className = 'mood-clear'
       }
     
@@ -150,9 +149,6 @@ function Weather({ searchTerm, find, setFind }) {
          cond={cond} 
          wind={wind}
          />
-         {/* <div>
-         <a href={<Login />} className='logout'>Log Out</a>
-         </div> */}
     </div>
   )
 }
