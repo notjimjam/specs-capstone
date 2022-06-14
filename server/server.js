@@ -9,7 +9,8 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.post('/refresh', (res, req) => {
-  const refreshToken = req.body.refreshToken;
+  console.log(req.body);
+  const refreshToken = req.body.refresh_token;
   const spotifyApi = new SpotifyWebApi({
     redirectUri: process.env.REDIRECT_URI,
     clientId: process.env.CLIENT_ID,
@@ -21,8 +22,8 @@ app.post('/refresh', (res, req) => {
     .refreshAccessToken()
     .then((data) => {
       res.json({
-        accessToken: data.body.accessToken,
-        expiresIn: data.body.expiresIn,
+        accessToken: data.body.access_token,
+        expiresIn: data.body.expires_in,
       });
     })
     .catch((err) => {

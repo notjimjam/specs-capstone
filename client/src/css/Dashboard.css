@@ -9,6 +9,8 @@
     width: 450px;
     height: 527px;
     color: #1b263b;
+    /* --color-hello: red;
+    color: var(--color-hello) */
 }
 
 .playlist-head{

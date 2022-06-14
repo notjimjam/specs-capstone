@@ -111,6 +111,11 @@ h1 {
   cursor: pointer
 }
 
+.mood-windy {
+  background-image: url(../images/windy.jpg);
+  background-size: cover;
+}
+
 .mood-sunny {
   background-image: url(../images/sunny.jpg);
   background-size:cover;
@@ -166,7 +171,3 @@ h1 {
   background-size: cover;
 }
 
-.mood-windy {
-  background-image: url(../images/windy1.jpg);
-  background-size: cover;
-}

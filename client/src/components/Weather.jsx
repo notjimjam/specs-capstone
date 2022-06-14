@@ -20,7 +20,7 @@ function Weather({ searchTerm, search, setSearch }) {
     const sunny = ['sunny', 'good jams', 'a perfect day', 'indie sunshine', 'soak up the sun', 'uplifting soul classics', 'surf rock sunshine']
     const randSunny = sunny[Math.floor(Math.random() * sunny.length)]
 
-    const windy = ['windy', 'windy weather', 'windy vibes']
+    const windy = ['windy days', 'windy weather', 'windy vibes', 'windy indie vibes']
     const randWindy = windy[Math.floor(Math.random() * windy.length)]
 
     const partly = ['chill hits', 'just good music', 'partly cloudy', 'partly cloudy forecast', 'chilled r&b', "healin' blues"]
@@ -68,7 +68,7 @@ function Weather({ searchTerm, search, setSearch }) {
 
     useEffect(() => {
       if(!value) return
-      // console.log('hi')
+      
       axios.get(`${baseUrl}${weatherKey}&q=${value}`)
         .then((res) => {
           setWeather(res.data)
@@ -80,9 +80,7 @@ function Weather({ searchTerm, search, setSearch }) {
 
     useEffect(() => {
       if(weather !== null)  {
-        // console.log('hi')
         setCond(weather.current.condition.text)
-        // setCond('wind')
         setWind(weather.current.wind_mph)
       }
     }, [weather])
@@ -90,42 +88,42 @@ function Weather({ searchTerm, search, setSearch }) {
     useEffect(() => {
       if(!cond) return
       if(!wind) return
-      // console.log('hi')
+      
       if (wind >= 30) {
-      setSearch(randWindy)
-        document.body.className='mood-windy'
-      } else if(cond.toLowerCase().includes("sunny")) {
-      setSearch(randSunny)
+        setSearch(randWindy)
+        document.body.className = 'mood-windy'
+      } else if(cond.toLowerCase().includes('sunny')) {
+        setSearch(randSunny)
         document.body.className = 'mood-sunny'
-      } else if(cond.toLowerCase().includes("partly")) {
-      setSearch(randPartly)
+      } else if(cond.toLowerCase().includes('partly')) {
+        setSearch(randPartly)
         document.body.className = 'mood-partly'
-      }else if(cond.toLowerCase().includes("freezing")) {
-      setSearch(randFreezing)
+      }else if(cond.toLowerCase().includes('freezing')) {
+        setSearch(randFreezing)
         document.body.className = 'mood-freezing'
-      }else if(cond.toLowerCase().includes("pellets")) {
-      setSearch(randHail)
-        document.body.className= 'mood-hail'
-      } else if(cond.toLowerCase().includes("snow") || cond.toLowerCase().includes('blizzard'))  {
-      setSearch(randSnow)
-        document.body.className= 'mood-snow'
-      } else if(cond.toLowerCase().includes("moderate rain") || cond.toLowerCase().includes('heavy rain') || cond.toLowerCase().includes('torrential')) {
-      setSearch(randHeavy)
-        document.body.className= 'mood-heavy'
-      } else if(cond.toLowerCase().includes("drizzle") || cond.toLowerCase().includes('rain') || cond.toLowerCase().includes('sleet')) {
-      setSearch(randRain)
-        document.body.className= 'mood-rain'
-      } else if(cond.toLowerCase().includes("cloudy") || cond.toLowerCase().includes('overcast')) {
-      setSearch(randCloudy)
-        document.body.className='mood-cloudy'
-      } else if(cond.toLowerCase().includes("mist") || cond.toLowerCase().includes('fog')) {
-      setSearch(randFog)
+      }else if(cond.toLowerCase().includes('pellets')) {
+        setSearch(randHail)
+        document.body.className = 'mood-hail'
+      } else if(cond.toLowerCase().includes('snow') || cond.toLowerCase().includes('blizzard'))  {
+        setSearch(randSnow)
+        document.body.className = 'mood-snow'
+      } else if(cond.toLowerCase().includes('moderate rain') || cond.toLowerCase().includes('heavy rain') || cond.toLowerCase().includes('torrential')) {
+        setSearch(randHeavy)
+        document.body.className = 'mood-heavy'
+      } else if(cond.toLowerCase().includes('drizzle') || cond.toLowerCase().includes('rain') || cond.toLowerCase().includes('sleet')) {
+        setSearch(randRain)
+        document.body.className = 'mood-rain'
+      } else if(cond.toLowerCase().includes('cloudy') || cond.toLowerCase().includes('overcast')) {
+        setSearch(randCloudy)
+        document.body.className ='mood-cloudy'
+      } else if(cond.toLowerCase().includes('mist') || cond.toLowerCase().includes('fog')) {
+        setSearch(randFog)
         document.body.className = 'mood-fog'
-      } else if(cond.toLowerCase().includes("thunder")) {
-      setSearch(randThunder)
-        document.body.className='mood-thunder'
-      } else if(cond.toLowerCase().includes("clear")) {
-      setSearch(randClear)
+      } else if(cond.toLowerCase().includes('thunder')) {
+        setSearch(randThunder)
+        document.body.className ='mood-thunder'
+      } else if(cond.toLowerCase().includes('clear')) {
+        setSearch(randClear)
         document.body.className = 'mood-clear'
       }
     

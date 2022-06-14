@@ -21,7 +21,6 @@ function useAuth(code) {
         setAccessToken(data.accessToken);
         setRefreshToken(data.refreshToken);
         setExpiresIn(data.expiresIn);
-        // console.log(data);
         window.history.pushState({}, null, '/');
       })
       .catch((err) => {
